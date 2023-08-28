@@ -14,6 +14,15 @@ const displayPhones = (phones) => {
     // clear phone container cards before adding new cards
     phonesContainer.textContent = '';
 
+    // display first 12 phones if result is grater than 12
+    const showAllBtnContainer = document.getElementById('show-all-btn-container');
+    if(phones.length > 12) {
+        showAllBtnContainer.classList.remove('hidden');
+    }
+    else {
+        showAllBtnContainer.classList.add('hidden');
+    }
+
     phones.forEach(phone => {
         // console.log(phone);
         const {brand, phone_name, image, slug} = phone;
@@ -22,13 +31,13 @@ const displayPhones = (phones) => {
         phoneDiv.classList = `card bg-gray-100 shadow-lg`;
         phoneDiv.innerHTML = `
             <figure class="p-10 bg-white m-4 rounded-xl">
-            <img src="${image}" alt="Shoes" class="" />
+            <img src="${image}" alt="${phone_name}" class="" />
               </figure>
             <div class="card-body items-center text-center">
                 <h2 class="card-title">${phone_name}</h2>
                 <h2 class="">Brand: ${brand}</h2>
                 <div class="card-actions">
-                  <button class="btn btn-primary" onclick="showDetailsModal('${slug}')">Buy Now</button>
+                  <button class="btn btn-info normal-case" onclick="showDetailsModal('${slug}')">Details</button>
                 </div>
             </div>
         `;
@@ -51,4 +60,4 @@ const handleSearch = () => {
     loadPhone(searchText)
 }
 
-loadPhone('f');
+loadPhone('z');
