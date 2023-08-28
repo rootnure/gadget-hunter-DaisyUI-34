@@ -96,9 +96,11 @@ const showGadgetDetails = gadget => {
 
     const modalDetailsContainer = document.getElementById('dynamic-details-data-modal-container');
 
-    const {brand, name, releaseDate, image, mainFeatures, others} = gadget;
-    const {memory, storage, displaySize, chipSet, sensors} = mainFeatures;
-    const {GPS, Bluetooth, NFC, Radio, USB, WLAN} = others;
+    const {brand, name, releaseDate, image, mainFeatures, others} = gadget || {brand: null, name: null, releaseDate: null, image: null, mainFeatures: null, others: null};
+
+    const {memory, storage, displaySize, chipSet, sensors} = mainFeatures || {memory: null, storage: null, displaySize: null, chipSet: null, sensors: null};
+
+    const {GPS, Bluetooth, NFC, Radio, USB, WLAN} = others || {GPS: null, Bluetooth: null, NFC: null, Radio: null, USB: null, WLAN: null};
 
     modalDetailsContainer.innerHTML = `
         <figure class="p-10 bg-sky-50 rounded-xl">
@@ -106,27 +108,25 @@ const showGadgetDetails = gadget => {
         </figure>
         <div class="my-2">
             <h2 class="text-3xl my-4 font-bold">${name}</h2>
-            <div class="text-lg flex flex-col gap-y-2">
-                <p><span class="font-bold">Brand: </span>${brand ? brand : 'Data not available'}</p>
-                <p><span class="font-bold">Release Date: </span>${releaseDate ? releaseDate : 'Data not available'}</p>
-                <p><span class="font-bold">Chipset: </span>${chipSet ? chipSet : 'Data not available'}</p>
-                <p><span class="font-bold">Storage: </span>${storage ? storage : 'Data not available'}</p>
-                <p><span class="font-bold">Display Size: </span>${displaySize ? displaySize : 'Data not available'}</p>
-                <p><span class="font-bold">Memory: </span>${memory ? memory : 'Data not available'}</p>
-                <p><span class="font-bold">WLAN: </span>${WLAN ? WLAN : 'Data not available'}</p>
-                <p><span class="font-bold">Bluetooth: </span>${Bluetooth ? Bluetooth : 'Data not available'}</p>
-                <p><span class="font-bold">NFC: </span>${NFC ? NFC : 'Data not available'}</p>
-                <p><span class="font-bold">USB: </span>${USB ? USB : 'Data not available'}</p>
-                <p><span class="font-bold">GPS: </span>${GPS ? GPS : 'Data not available'}</p>
-                <p><span class="font-bold">Radio: </span>${Radio ? Radio : 'Data not available'}</p>
-                <p><span class="font-bold">Sensors: </span>${sensors ? sensors.join(', ') : 'Data not available'}</p>
+            <div class="flex flex-col gap-y-2">
+                <p><span class="font-bold">Brand: </span>${brand ? brand : '<small>No data available</small>'}</p>
+                <p><span class="font-bold">Release Date: </span>${releaseDate ? releaseDate : '<small>No data available</small>'}</p>
+                <p><span class="font-bold">Chipset: </span>${chipSet ? chipSet : '<small>No data available</small>'}</p>
+                <p><span class="font-bold">Storage: </span>${storage ? storage : '<small>No data available</small>'}</p>
+                <p><span class="font-bold">Display Size: </span>${displaySize ? displaySize : '<small>No data available</small>'}</p>
+                <p><span class="font-bold">Memory: </span>${memory ? memory : '<small>No data available</small>'}</p>
+                <p><span class="font-bold">WLAN: </span>${WLAN ? WLAN : '<small>No data available</small>'}</p>
+                <p><span class="font-bold">Bluetooth: </span>${Bluetooth ? Bluetooth : '<small>No data available</small>'}</p>
+                <p><span class="font-bold">NFC: </span>${NFC ? NFC : '<small>No data available</small>'}</p>
+                <p><span class="font-bold">USB: </span>${USB ? USB : '<small>No data available</small>'}</p>
+                <p><span class="font-bold">GPS: </span>${GPS ? GPS : '<small>No data available</small>'}</p>
+                <p><span class="font-bold">Radio: </span>${Radio ? Radio : '<small>No data available</small>'}</p>
+                <p><span class="font-bold">Sensors: </span>${sensors ? sensors.join(', ') : '<small>No data available</small>'}</p>
             </div>
         </div>
     `;
 
-
     showDetailsModal.showModal();
-    console.log(gadget);
 }
 
-loadPhone('z', false);
+loadPhone('samsung', false);
