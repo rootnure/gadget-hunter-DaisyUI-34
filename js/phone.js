@@ -5,7 +5,7 @@ const loadPhone = async (searchText, isShowAll) => {
     const res = await fetch(url);
     const data = await res.json();
     const phones = data.data;
-    console.log(phones);
+    // console.log(phones);
     displayPhones(phones, isShowAll);
 }
 
@@ -40,7 +40,7 @@ const displayPhones = (phones, isShowAll) => {
                 <h2 class="card-title">${phone_name}</h2>
                 <h2 class="">Brand: ${brand}</h2>
                 <div class="card-actions">
-                  <button class="btn btn-info normal-case" onclick="showDetailsModal('${slug}')">Details</button>
+                  <button class="btn btn-info normal-case" onclick="handleShowDetails('${slug}')">Details</button>
                 </div>
             </div>
         `;
@@ -77,6 +77,56 @@ const toggleLoadingSpinner = (isVisible) => {
 
 const handleShowAll = () => {
     handleSearch(true);
+}
+
+// 
+const handleShowDetails = async (id) => {
+    // console.log('clicked', id);
+    // load gadget data
+    const url = `https://openapi.programming-hero.com/api/phone/${id}`;
+    const res = await fetch(url);
+    const data = await res.json();
+
+    const gadget = data.data;
+
+    showGadgetDetails(gadget);
+}
+
+const showGadgetDetails = gadget => {
+
+    const modalDetailsContainer = document.getElementById('dynamic-details-data-modal-container');
+
+    const {brand, name, releaseDate, image, mainFeatures, others} = gadget;
+    const {memory, storage, displaySize, chipSet, sensors} = mainFeatures;
+    const {GPS, Bluetooth, NFC, Radio, USB, WLAN} = others;
+
+    modalDetailsContainer.innerHTML = `
+        <figure class="p-10 bg-sky-50 rounded-xl">
+            <img src="${image}" alt="${brand}: ${name}" class="mx-auto" />
+        </figure>
+        <div class="my-2">
+            <h2 class="text-3xl my-4 font-bold">${name}</h2>
+            <div class="text-lg flex flex-col gap-y-2">
+                <p><span class="font-bold">Brand: </span>${brand}</p>
+                <p><span class="font-bold">Release Date: </span>${releaseDate}</p>
+                <p><span class="font-bold">Chipset: </span>${chipSet}</p>
+                <p><span class="font-bold">Storage: </span>${storage}</p>
+                <p><span class="font-bold">Display Size: </span>${displaySize}</p>
+                <p><span class="font-bold">Memory: </span>${memory}</p>
+                <p><span class="font-bold">WLAN: </span>${WLAN}</p>
+                <p><span class="font-bold">Bluetooth: </span>${Bluetooth}</p>
+                <p><span class="font-bold">NFC: </span>${NFC}</p>
+                <p><span class="font-bold">USB: </span>${USB}</p>
+                <p><span class="font-bold">GPS: </span>${GPS}</p>
+                <p><span class="font-bold">Radio: </span>${Radio}</p>
+                <p><span class="font-bold">Sensors: </span>${sensors.join(', ')}</p>
+            </div>
+        </div>
+    `;
+
+
+    showDetailsModal.showModal();
+    console.log(gadget);
 }
 
 loadPhone('z', false);

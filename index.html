@@ -30,9 +30,10 @@
             <div id="loading-spinner" class="text-center hidden my-32">
                 <span class="loading loading-spinner loading-lg text-info"></span>
             </div>
-            
+
             <!-- search result -->
-            <div id="phones-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-12">
+            <div id="phones-container"
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-12">
 
             </div>
             <!-- show all button for more than 12 results -->
@@ -40,6 +41,19 @@
                 <button onclick="handleShowAll()" class="btn btn-primary mx-auto">Show All</button>
             </div>
         </section>
+
+        <!-- modal here -->
+        <!-- Open the modal using ID.showModal() method -->
+        <dialog id="showDetailsModal" class="modal modal-bottom sm:modal-middle">
+            <form method="dialog" class="modal-box">
+                <div id="dynamic-details-data-modal-container">
+
+                </div>
+                <div class="modal-action">
+                    <button class="btn btn-error text-white">Close</button>
+                </div>
+            </form>
+        </dialog>
     </main>
     <script src="./js/phone.js"></script>
 </body>
