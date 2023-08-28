@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phone Hunter DaisyUI</title>
+    <title>Gadget Hunter DaisyUI</title>
 
     <!-- TailwindCSS & DaisyUI -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.6.2/dist/full.css" rel="stylesheet" type="text/css" />
@@ -13,12 +13,21 @@
 
 <body>
     <header>
-        <h1 class="text-6xl">Hunting Phone</h1>
+        <h1 class="text-6xl text-center">Gadget Hunter</h1>
     </header>
     <main>
-        <section>
-            <div id="phones-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-9/12 mx-auto">
-                
+        <!-- search field -->
+        <section class="bg-gray-100 p-4 m-4 rounded-2xl ">
+            <div class="relative">
+                <input type="text" id="search-field" placeholder="search" class="input input-bordered w-full pr-16" />
+                <button class="btn btn-accent absolute top-0 right-0 rounded-l-none" onclick="handleSearch()">Search</button>
+            </div>
+        </section>
+
+        <!-- search result -->
+        <section class="container mx-auto">
+            <div id="phones-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+
             </div>
         </section>
     </main>
