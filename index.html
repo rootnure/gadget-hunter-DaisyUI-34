@@ -21,7 +21,7 @@
             <div class="relative max-w-sm">
                 <input type="text" id="search-field" placeholder="search" class="input input-bordered w-full pr-16" />
                 <button class="btn btn-success absolute top-0 right-0 rounded-l-none normal-case"
-                    onclick="handleSearch()">Search</button>
+                    onclick="handleSearch(false)">Search</button>
             </div>
         </section>
 
@@ -36,8 +36,8 @@
 
             </div>
             <!-- show all button for more than 12 results -->
-            <div id="show-all-btn-container" class="my-12 flex items-center">
-                <button class="btn btn-primary mx-auto">Show All</button>
+            <div id="show-all-btn-container" class="my-8 flex items-center">
+                <button onclick="handleShowAll()" class="btn btn-primary mx-auto">Show All</button>
             </div>
         </section>
     </main>

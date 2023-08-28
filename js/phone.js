@@ -1,4 +1,4 @@
-const loadPhone = async (searchText) => {
+const loadPhone = async (searchText, isShowAll) => {
     // show loading spinner
     toggleLoadingSpinner(true);
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`
@@ -6,10 +6,10 @@ const loadPhone = async (searchText) => {
     const data = await res.json();
     const phones = data.data;
     console.log(phones);
-    displayPhones(phones);
+    displayPhones(phones, isShowAll);
 }
 
-const displayPhones = phones => {
+const displayPhones = (phones, isShowAll) => {
     // console.log(phones);
 
     const phonesContainer = document.getElementById('phones-container');
@@ -18,9 +18,9 @@ const displayPhones = phones => {
 
     // display first 12 phones if result is grater than 12
     const showAllBtnContainer = document.getElementById('show-all-btn-container');
-    if(phones.length > 12) {
-        phones = phones.slice(0, 12);
+    if (phones.length > 12 && !isShowAll) {
         showAllBtnContainer.classList.remove('hidden');
+        phones = phones.slice(0, 12);
     }
     else {
         showAllBtnContainer.classList.add('hidden');
@@ -28,7 +28,7 @@ const displayPhones = phones => {
 
     phones.forEach(phone => {
         // console.log(phone);
-        const {brand, phone_name, image, slug} = phone;
+        const { brand, phone_name, image, slug } = phone;
         // 2. create a div
         const phoneDiv = document.createElement('div');
         phoneDiv.classList = `card bg-gray-100 shadow-lg`;
@@ -46,28 +46,28 @@ const displayPhones = phones => {
         `;
         phonesContainer.appendChild(phoneDiv);
     });
-    
+
     // hide loading spinner
     toggleLoadingSpinner(false);
 }
 
 document.getElementById('search-field').addEventListener('keyup', function (e) {
     const key = e.key;
-    if(key === 'Enter'){
+    if (key === 'Enter') {
         handleSearch();
     }
 })
 
 // handle search button
-const handleSearch = () => {
+const handleSearch = (isShowAll = false) => {
     const searchInputField = document.getElementById('search-field');
     const searchText = searchInputField.value;
-    loadPhone(searchText)
+    loadPhone(searchText, isShowAll)
 }
 
 const toggleLoadingSpinner = (isVisible) => {
     const loadingSpinner = document.getElementById('loading-spinner');
-    if(isVisible){
+    if (isVisible) {
         loadingSpinner.classList.remove('hidden');
     }
     else {
@@ -75,4 +75,8 @@ const toggleLoadingSpinner = (isVisible) => {
     }
 }
 
-loadPhone('z');
+const handleShowAll = () => {
+    handleSearch(true);
+}
+
+loadPhone('z', false);
