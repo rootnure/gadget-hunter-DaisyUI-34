@@ -107,19 +107,19 @@ const showGadgetDetails = gadget => {
         <div class="my-2">
             <h2 class="text-3xl my-4 font-bold">${name}</h2>
             <div class="text-lg flex flex-col gap-y-2">
-                <p><span class="font-bold">Brand: </span>${brand}</p>
-                <p><span class="font-bold">Release Date: </span>${releaseDate}</p>
-                <p><span class="font-bold">Chipset: </span>${chipSet}</p>
-                <p><span class="font-bold">Storage: </span>${storage}</p>
-                <p><span class="font-bold">Display Size: </span>${displaySize}</p>
-                <p><span class="font-bold">Memory: </span>${memory}</p>
-                <p><span class="font-bold">WLAN: </span>${WLAN}</p>
-                <p><span class="font-bold">Bluetooth: </span>${Bluetooth}</p>
-                <p><span class="font-bold">NFC: </span>${NFC}</p>
-                <p><span class="font-bold">USB: </span>${USB}</p>
-                <p><span class="font-bold">GPS: </span>${GPS}</p>
-                <p><span class="font-bold">Radio: </span>${Radio}</p>
-                <p><span class="font-bold">Sensors: </span>${sensors.join(', ')}</p>
+                <p><span class="font-bold">Brand: </span>${brand ? brand : 'Data not available'}</p>
+                <p><span class="font-bold">Release Date: </span>${releaseDate ? releaseDate : 'Data not available'}</p>
+                <p><span class="font-bold">Chipset: </span>${chipSet ? chipSet : 'Data not available'}</p>
+                <p><span class="font-bold">Storage: </span>${storage ? storage : 'Data not available'}</p>
+                <p><span class="font-bold">Display Size: </span>${displaySize ? displaySize : 'Data not available'}</p>
+                <p><span class="font-bold">Memory: </span>${memory ? memory : 'Data not available'}</p>
+                <p><span class="font-bold">WLAN: </span>${WLAN ? WLAN : 'Data not available'}</p>
+                <p><span class="font-bold">Bluetooth: </span>${Bluetooth ? Bluetooth : 'Data not available'}</p>
+                <p><span class="font-bold">NFC: </span>${NFC ? NFC : 'Data not available'}</p>
+                <p><span class="font-bold">USB: </span>${USB ? USB : 'Data not available'}</p>
+                <p><span class="font-bold">GPS: </span>${GPS ? GPS : 'Data not available'}</p>
+                <p><span class="font-bold">Radio: </span>${Radio ? Radio : 'Data not available'}</p>
+                <p><span class="font-bold">Sensors: </span>${sensors ? sensors.join(', ') : 'Data not available'}</p>
             </div>
         </div>
     `;
