@@ -1,4 +1,6 @@
 const loadPhone = async (searchText) => {
+    // show loading spinner
+    toggleLoadingSpinner(true);
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`
     const res = await fetch(url);
     const data = await res.json();
@@ -7,7 +9,7 @@ const loadPhone = async (searchText) => {
     displayPhones(phones);
 }
 
-const displayPhones = (phones) => {
+const displayPhones = phones => {
     // console.log(phones);
 
     const phonesContainer = document.getElementById('phones-container');
@@ -17,6 +19,7 @@ const displayPhones = (phones) => {
     // display first 12 phones if result is grater than 12
     const showAllBtnContainer = document.getElementById('show-all-btn-container');
     if(phones.length > 12) {
+        phones = phones.slice(0, 12);
         showAllBtnContainer.classList.remove('hidden');
     }
     else {
@@ -43,6 +46,9 @@ const displayPhones = (phones) => {
         `;
         phonesContainer.appendChild(phoneDiv);
     });
+    
+    // hide loading spinner
+    toggleLoadingSpinner(false);
 }
 
 document.getElementById('search-field').addEventListener('keyup', function (e) {
@@ -50,7 +56,6 @@ document.getElementById('search-field').addEventListener('keyup', function (e) {
     if(key === 'Enter'){
         handleSearch();
     }
-    console.log(key);
 })
 
 // handle search button
@@ -58,6 +63,16 @@ const handleSearch = () => {
     const searchInputField = document.getElementById('search-field');
     const searchText = searchInputField.value;
     loadPhone(searchText)
+}
+
+const toggleLoadingSpinner = (isVisible) => {
+    const loadingSpinner = document.getElementById('loading-spinner');
+    if(isVisible){
+        loadingSpinner.classList.remove('hidden');
+    }
+    else {
+        loadingSpinner.classList.add('hidden');
+    }
 }
 
 loadPhone('z');

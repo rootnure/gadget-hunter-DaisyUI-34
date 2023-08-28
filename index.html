@@ -17,7 +17,7 @@
     </header>
     <main>
         <!-- search field -->
-        <section class="bg-gray-100 p-4 m-4 rounded-2xl">
+        <section class="bg-gray-100 p-4 m-4 rounded-2xl container mx-auto">
             <div class="relative max-w-sm">
                 <input type="text" id="search-field" placeholder="search" class="input input-bordered w-full pr-16" />
                 <button class="btn btn-success absolute top-0 right-0 rounded-l-none normal-case"
@@ -25,11 +25,17 @@
             </div>
         </section>
 
-        <!-- search result -->
         <section class="container mx-auto">
+            <!-- loading spinner -->
+            <div id="loading-spinner" class="text-center hidden my-32">
+                <span class="loading loading-spinner loading-lg text-info"></span>
+            </div>
+            
+            <!-- search result -->
             <div id="phones-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-12">
 
             </div>
+            <!-- show all button for more than 12 results -->
             <div id="show-all-btn-container" class="my-12 flex items-center">
                 <button class="btn btn-primary mx-auto">Show All</button>
             </div>
