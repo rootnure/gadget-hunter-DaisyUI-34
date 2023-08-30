@@ -16,8 +16,24 @@ const displayPhones = (phones, isShowAll) => {
     // clear phone container cards before adding new cards
     phonesContainer.textContent = '';
 
-    // display first 12 phones if result is grater than 12
     const showAllBtnContainer = document.getElementById('show-all-btn-container');
+
+    if (phones.length <= 0) {
+        phonesContainer.innerHTML = `
+            <div class="h-24 md:h-52 lg:h-96 w-full flex justify-center items-center col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4">
+                <p class="text-2xl font-bold text-gray-300">No data found</p>
+            </div>
+        
+        `;
+
+        toggleLoadingSpinner(false);
+
+        showAllBtnContainer.classList.add('hidden');
+
+        return;
+    }
+
+    // display first 12 phones if result is grater than 12
     if (phones.length > 12 && !isShowAll) {
         showAllBtnContainer.classList.remove('hidden');
         phones = phones.slice(0, 12);
@@ -96,32 +112,34 @@ const showGadgetDetails = gadget => {
 
     const modalDetailsContainer = document.getElementById('dynamic-details-data-modal-container');
 
-    const {brand, name, releaseDate, image, mainFeatures, others} = gadget || {brand: null, name: null, releaseDate: null, image: null, mainFeatures: null, others: null};
+    const { brand, name, releaseDate, image, mainFeatures, others } = gadget || { brand: null, name: null, releaseDate: null, image: null, mainFeatures: null, others: null };
 
-    const {memory, storage, displaySize, chipSet, sensors} = mainFeatures || {memory: null, storage: null, displaySize: null, chipSet: null, sensors: null};
+    const { memory, storage, displaySize, chipSet, sensors } = mainFeatures || { memory: null, storage: null, displaySize: null, chipSet: null, sensors: null };
 
-    const {GPS, Bluetooth, NFC, Radio, USB, WLAN} = others || {GPS: null, Bluetooth: null, NFC: null, Radio: null, USB: null, WLAN: null};
+    const { GPS, Bluetooth, NFC, Radio, USB, WLAN } = others || { GPS: null, Bluetooth: null, NFC: null, Radio: null, USB: null, WLAN: null };
 
     modalDetailsContainer.innerHTML = `
         <figure class="p-10 bg-sky-50 rounded-xl">
             <img src="${image}" alt="${brand}: ${name}" class="mx-auto" />
         </figure>
         <div class="my-2">
-            <h2 class="text-3xl my-4 font-bold">${name}</h2>
+            <h2 class="text-3xl mt-4 font-bold text-center">${name}</h2>
+            <p class="font-bold text-lg mb-4 text-center"><small class="italic font-normal">by </small>${brand ? brand : '<small>No data available</small>'}</p>
             <div class="flex flex-col gap-y-2">
-                <p><span class="font-bold">Brand: </span>${brand ? brand : '<small>No data available</small>'}</p>
                 <p><span class="font-bold">Release Date: </span>${releaseDate ? releaseDate : '<small>No data available</small>'}</p>
                 <p><span class="font-bold">Chipset: </span>${chipSet ? chipSet : '<small>No data available</small>'}</p>
                 <p><span class="font-bold">Storage: </span>${storage ? storage : '<small>No data available</small>'}</p>
                 <p><span class="font-bold">Display Size: </span>${displaySize ? displaySize : '<small>No data available</small>'}</p>
                 <p><span class="font-bold">Memory: </span>${memory ? memory : '<small>No data available</small>'}</p>
-                <p><span class="font-bold">WLAN: </span>${WLAN ? WLAN : '<small>No data available</small>'}</p>
-                <p><span class="font-bold">Bluetooth: </span>${Bluetooth ? Bluetooth : '<small>No data available</small>'}</p>
-                <p><span class="font-bold">NFC: </span>${NFC ? NFC : '<small>No data available</small>'}</p>
-                <p><span class="font-bold">USB: </span>${USB ? USB : '<small>No data available</small>'}</p>
-                <p><span class="font-bold">GPS: </span>${GPS ? GPS : '<small>No data available</small>'}</p>
-                <p><span class="font-bold">Radio: </span>${Radio ? Radio : '<small>No data available</small>'}</p>
-                <p><span class="font-bold">Sensors: </span>${sensors ? sensors.join(', ') : '<small>No data available</small>'}</p>
+                <div class="text-sm p-2 rounded-lg bg-gray-100">
+                    <p><span class="font-bold">WLAN: </span>${WLAN ? WLAN : '<span class="italic text-gray-500">No data available</span>'}</p>
+                    <p><span class="font-bold">Bluetooth: </span>${Bluetooth ? Bluetooth : '<span class="italic text-gray-500">No data available</span>'}</p>
+                    <p><span class="font-bold">NFC: </span>${NFC ? NFC : '<span class="italic text-gray-500">No data available</span>'}</p>
+                    <p><span class="font-bold">USB: </span>${USB ? USB : '<span class="italic text-gray-500">No data available</span>'}</p>
+                    <p><span class="font-bold">GPS: </span>${GPS ? GPS : '<span class="italic text-gray-500">No data available</span>'}</p>
+                    <p><span class="font-bold">Radio: </span>${Radio ? Radio : '<span class="italic text-gray-500">No data available</span>'}</p>
+                    <p><span class="font-bold">Sensors: </span>${sensors ? sensors.join(', ') : '<span class="italic text-gray-500">No data available</span>'}</p>
+                </div>
             </div>
         </div>
     `;
@@ -129,4 +147,4 @@ const showGadgetDetails = gadget => {
     showDetailsModal.showModal();
 }
 
-loadPhone('samsung', false);
+loadPhone('oppo', false);
